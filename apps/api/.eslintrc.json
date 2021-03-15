@@ -1,0 +1,19 @@
+{
+  "extends": "../../.eslintrc.json",
+  "ignorePatterns": ["!**/*"],
+  "overrides": [
+    {
+      "files": ["*.ts", "*.tsx", "*.js", "*.jsx"],
+      "parserOptions": { "project": ["apps/api/tsconfig.*?.json"] },
+      "rules": {
+        "no-multiple-empty-lines": ["error", {"max": 1, "maxEOF": 0}],
+        "indent": [
+          "error",
+          2
+        ]
+      }
+    },
+    { "files": ["*.ts", "*.tsx"], "rules": {} },
+    { "files": ["*.js", "*.jsx"], "rules": {} }
+  ]
+}
