@@ -1,0 +1,27 @@
+# names should be same here and in services
+type Mutation {
+  #  material
+  deleteMaterialById(id: ID!): String
+
+  #  box
+  deleteBoxById(id:ID!):String
+  createBox(userId:ID!):Box
+  updateBoxById(id:ID,box:InputBox): Box
+}
+
+input InputBox {
+  name: String,
+  model :ModelEnum,
+  tape: TapeInput,
+  material: ID
+
+}
+
+
+
+input TapeInput {
+  name: String!,
+  color:String!,
+  position:TapePositionEnum,
+  width: Float
+}

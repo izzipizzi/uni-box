@@ -1,0 +1,46 @@
+type Material {
+    _id: ID!
+    name: String!
+    texture: String!
+}
+type User {
+  _id: ID!
+  name: String!
+  email: String!
+  boxes: [String]!
+  role: String!
+}
+
+type Box{
+  name: String!
+  model: ModelEnum!
+  tape : Tape
+  material:String!
+  color:String!
+  width: Float!
+  length: Float!
+  height: Float!
+  user: ID!
+
+}
+
+type Tape {
+  name: String!
+  colro: String!
+  position: TapePositionEnum
+  width: Float!
+
+}
+
+enum TapePositionEnum {
+  CENTER,
+  CORNER
+
+}
+
+enum ModelEnum {
+  SQUARE,
+  ROUND,
+  HEART
+
+}

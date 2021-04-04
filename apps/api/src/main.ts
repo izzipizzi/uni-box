@@ -4,51 +4,85 @@
  */
 
 import * as express from 'express';
-import cors from 'cors'
-import morgan from 'morgan'
-import * as bodyParser from "body-parser";
-import * as cookieParser from 'cookie-parser'
+import * as cors from 'cors';
+import * as morgan from 'morgan';
+import * as bodyParser from 'body-parser';
+import {generateMiddlewareGraphql} from "./app/middlewares/graphql-express/graphql-express.middleware";
+import AuthMiddleware from "./app/middlewares/auth/auth.middleware";
+import { ApolloServer, gql } from 'apollo-server-express';
 
-import {graphqlHTTP} from "express-graphql";
 
 const mongoose = require('mongoose')
+const materialController =  require('./app/controllers/materialController')
 
 
-import rootSchema from "./app/graphql/rootSchema";
+const start = async () => {
+  const port = process.env.port || 3333;
+  const API_PATH = '/graphql';
+
+  const app = express();
+  app.use(cors({
+    credentials: true
+  }));
+  app.use(bodyParser.json());
+  app.use( bodyParser.urlencoded({ extended: true }));
+
+  const local = true;
+  require("dotenv").config()
+  mongoose.connect(local ? process.env.MONGODB_URI_LOCAL : process.env.MONGODB_URI, {
+    useNewUrlParser: true,
+    useCreateIndex: true,
+    useUnifiedTopology: true
+
+  }).then(() => {
+    console.log(`He-he ....\nDB connected`)
+  })
+  const graphqlMiddleware = await generateMiddlewareGraphql();
+
+  app.use(morgan());
+
+  app.use('/api', materialController)
+
+  app.post(API_PATH,
+    [
+      bodyParser.json(),
+      AuthMiddleware,
+      graphqlMiddleware,
+
+    ],
+  );
+  //
+  // const typeDefs = gql`
+  //   type Query {
+  //     hello: String
+  //   }
+  //   type Mutation {
+  //     createMaterial(name:String!,texture:Upload,normal_texture:Upload):String
+  //   }
+  // `;
+  //
+  // const resolvers = {
+  //   Query: {
+  //     hello: () => "Hello world!",
+  //   },
+  //   Mutation: {
+  //     createMaterial: (parent, args) => {
+  //       console.log(args);
+  //       // return "Success";
+  //     },
+  //   },
+  // };
+  //
+  // const server = new ApolloServer({ typeDefs, resolvers });
+  //
+  // server.applyMiddleware({ app });
 
 
-const materialController = require('./app/controllers/materialController')
-const app = express();
-require("dotenv").config()
+  app.listen(port, () => {
+    console.log(`Graphql server started on http://localhost:${port}${API_PATH}`);
+  });
 
 
-app.use(cors())
+}
 
-mongoose.connect(process.env.MONGODB_URI, {
-  useNewUrlParser: true,
-  useCreateIndex: true,
-  useUnifiedTopology: true
-
-}).then(() => {
-  console.log(`He-he ....\nDB connected`)
-})
-
-
-app.use(morgan('dev'))
-app.use(bodyParser.json())
-app.use(cookieParser())
-// app.use(expressValidator)
-
-
-app.use('/api', materialController)
-app.use('/graphql', graphqlHTTP({
-  schema: rootSchema,
-  graphiql: true,
-}))
-
-
-const port = process.env.port || 3333;
-const server = app.listen(port, () => {
-  console.log(`Listening at http://localhost:${port}/api`);
-});
-server.on('error', console.error);
+start()

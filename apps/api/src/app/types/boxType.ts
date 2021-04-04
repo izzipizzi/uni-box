@@ -1,9 +1,9 @@
 import {GraphQLEnumType, GraphQLID, GraphQLInt, GraphQLObjectType, GraphQLString} from "graphql";
 import MaterialType from "./materialType";
 
-const Tape = require('../../models/tape')
-const Material = require('../../models/material')
-const User = require('../../models/user')
+const Tape = require('../models/tape')
+const Material = require('../models/material')
+const User = require('../models/user')
 require('dotenv').config()
 
 const ModelEnumType = new GraphQLEnumType({

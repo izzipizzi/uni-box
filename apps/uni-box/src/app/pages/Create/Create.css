@@ -1,0 +1,68 @@
+.ion-row{
+  height: 100%;
+  padding: 0;
+
+}
+/*.ion-col{*/
+/*    height: 100%;*/
+/*    background: #e04055;*/
+/*}*/
+.ion-grid{
+  height: 100%;
+  /*background: #e0ac08;*/
+  padding: 0;
+
+}
+.ion-col{
+  max-width: 50%;
+  height: 100%;
+  overflow-y: scroll;
+}
+
+.canvas{
+  height: 100%;
+  /*border: 2px solid red;*/
+  /*border-radius: 10%;*/
+  /*display: block;*/
+  /*position: relative;*/
+  /*margin-top: 3.5em;*/
+  overflow: hidden;
+  padding: 0;
+}
+
+.materials{
+
+  /*display: flex;*/
+  /*flex-direction: row;*/
+  /*justify-content: flex-start;*/
+  /*align-items: center;*/
+  /*width:auto;*/
+  /*height: 150px;*/
+  /*overflow-x:scroll;*/
+  /*display: block ruby;*/
+  overflow-x: auto;
+  overflow-y: auto;
+  white-space: nowrap;
+
+}
+.materials .materials-card{
+  display: flex;
+  text-align: center;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  float: none;
+  width: 80px;
+  word-spacing: 20px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.materials-card-add{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 80px;
+  overflow: hidden;
+}
+

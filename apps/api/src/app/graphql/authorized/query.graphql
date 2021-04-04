@@ -1,0 +1,14 @@
+type Query {
+#  material
+    getMaterialById(_id: String!): Material
+    getMaterials: [Material!]!
+  getAllMaterialsByUser(id:String): [Material!]!
+
+#  box
+  getBoxById(_id:String):Box
+  getBoxesByUser(userId:ID!):[Box!]
+
+#  user
+  getUserByToken(token: String!):User!,
+
+}

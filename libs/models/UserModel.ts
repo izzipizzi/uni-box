@@ -4,5 +4,6 @@ export interface UserModel {
   hashed_password:string,
   password:string,
   salt:string,
-  boxes:[string]
+  boxes:[string],
+  role
 }

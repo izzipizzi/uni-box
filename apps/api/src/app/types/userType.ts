@@ -3,7 +3,7 @@ import MaterialType from "./materialType";
 const graphql = require('graphql')
 const {GraphQLObjectType, GraphQLString, GraphQLID, GraphQLList} = graphql
 
-const Box = require('../../models/box')
+const Box = require('../models/box')
 
 const UserType = (types) => new GraphQLObjectType({
   name: 'User',

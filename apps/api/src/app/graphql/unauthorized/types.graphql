@@ -1,0 +1,13 @@
+type LoginResponse {
+  token: String,
+  error: String,
+  user:User
+}
+
+type User {
+  _id: ID!
+  name: String!
+  email: String!
+  boxes: [String]!
+  role: String!
+}
