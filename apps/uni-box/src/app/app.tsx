@@ -33,6 +33,7 @@ import AuthRoute from './utils/AuthRoute';
 import PrivateRoute from './utils/PrivateRoute';
 import AdminRoute from './utils/AdminRoute';
 import { AuthContext } from './context/auth';
+import { GRAPHQL } from './constatnts';
 
 
 const App: React.FC = (props) => {
@@ -41,7 +42,7 @@ const App: React.FC = (props) => {
 
 
   const link = createUploadLink({
-    uri: 'http://localhost:3333/graphql', headers: {
+    uri: GRAPHQL, headers: {
       authorization: localStorage.getItem('jwt') ? `Bearer ${localStorage.getItem('jwt')}` : ''
     },
     credentials: 'same-origin'
@@ -49,7 +50,6 @@ const App: React.FC = (props) => {
 
   const client = new ApolloClient({
     link,
-// @ts-ignore
     cache: new InMemoryCache()
 
   });

@@ -4,20 +4,27 @@ import {
   IonAvatar,
   IonButton,
   IonCard,
+  IonCardHeader,
+  IonCardSubtitle,
+  IonCardTitle,
   IonCol,
   IonContent,
   IonGrid,
   IonHeader,
+  IonImg,
   IonInput,
   IonItem,
   IonLabel,
+  IonList,
+  IonListHeader,
   IonModal,
   IonPage,
   IonRange,
   IonRow,
   IonSegment,
   IonSegmentButton,
-  IonToolbar,
+  IonThumbnail,
+  IonToolbar
 } from '@ionic/react';
 import './Create.css';
 import {Canvas} from "react-three-fiber";
@@ -26,7 +33,7 @@ import Rounded from '../../components/rounded/Rounded';
 import Floor from '../../components/floor/Floor';
 import {OrbitControls} from "@react-three/drei";
 import {useQuery} from '@apollo/client';
-import {GET_MATERIALS} from './query';
+import { GET_MATERIALS, GET_MATERIALS_BY_USER } from './query';
 import {API} from '../../constatnts';
 import {AuthContext} from "../../context/auth";
 import {BoxContext} from "../../context/box";
@@ -40,6 +47,7 @@ const Create: React.FC = () => {
   const [toggle, setToggle] = useState('square');
   const [click, setClick] = useState(false);
   const [showModal, setShowModal] = useState(false);
+  const [showBoxModal, setShowBoxModal] = useState(false);
 
   const [error, setError] = useState({
     isError: false,
@@ -82,25 +90,45 @@ const Create: React.FC = () => {
     })
 
   }
-  const [materials, setMaterials] = useState([])
+  const [defaultMaterials, setDefaultMaterials] = useState([])
+  const [userMaterials, setUserMaterials] = useState([])
 
-  const materialRes = useQuery(GET_MATERIALS);
+  const defaultMaterialRes = useQuery(GET_MATERIALS);
+  const userMaterialRes = useQuery(GET_MATERIALS_BY_USER,{
+    variables: { id: loginContext.user._id},
+  });
   useEffect(() => {
-    if (materialRes.loading) {
+    if (userMaterialRes.loading){
     } else {
-      if (!materialRes.data) {
+      if (!userMaterialRes.data) {
         loginContext.logout()
       } else {
-        const tempMaterials = JSON.parse(JSON.stringify(materialRes?.data?.getMaterials))
+        const tempMaterials = JSON.parse(JSON.stringify(userMaterialRes?.data?.getAllMaterialsByUser))
 
         tempMaterials.forEach(material => {
           material.texture = `${API}/photo/${material?.texture}`
         })
-        setMaterials(tempMaterials)
+        setUserMaterials(tempMaterials)
         boxContext.setBox({...boxContext.box, material: tempMaterials[0]})
       }
     }
-  }, [materialRes.loading])
+  }, [userMaterialRes.loading])
+  useEffect(() => {
+    if (defaultMaterialRes.loading){
+    } else {
+      if (!defaultMaterialRes.data) {
+        loginContext.logout()
+      } else {
+        const tempMaterials = JSON.parse(JSON.stringify(defaultMaterialRes?.data?.getMaterials))
+
+        tempMaterials.forEach(material => {
+          material.texture = `${API}/photo/${material?.texture}`
+        })
+        setDefaultMaterials(tempMaterials)
+        boxContext.setBox({...boxContext.box, material: tempMaterials[0]})
+      }
+    }
+  }, [defaultMaterialRes.loading])
   const [tempFile, setTempFile] = useState({})
   return (
     <IonPage>
@@ -113,9 +141,11 @@ const Create: React.FC = () => {
             <IonCol class={'ion-col'}>
               <IonToolbar>
                 <IonSegment onIonChange={(e: any) => {
-                  setToggle(e.detail.value)
+                  // setToggle(e.detail.value)
+                  // console.log(e.detail.value)
+                  // console.log(toggle)
                   boxContext.setBox({...boxContext.box, type: e.detail.value})
-                }} value={toggle}>
+                }} value={boxContext.box.type}>
                   <IonSegmentButton value="square">
                     Square Box
                   </IonSegmentButton>
@@ -124,8 +154,8 @@ const Create: React.FC = () => {
                   </IonSegmentButton>
                 </IonSegment>
               </IonToolbar>
-              <IonRow className={'materials'}>
-                {materials.map(material => {
+              <IonRow className={'defaultMaterials'}>
+                {defaultMaterials.map(material => {
                   return (
                     <IonCard className={'materials-card'} onClick={() => {
                       boxContext.setBox({...boxContext.box, material, loading: false})
@@ -136,7 +166,20 @@ const Create: React.FC = () => {
                       </IonAvatar>
                     </IonCard>)
                 })}
-                <IonCard className={'materials-card-add'} onClick={() => {
+              </IonRow>
+              <IonRow className={'userMaterials'}>
+                {userMaterials.map(material => {
+                  return (
+                    <IonCard className={'materials-card'} onClick={() => {
+                      boxContext.setBox({...boxContext.box, material, loading: false})
+                    }} key={material?._id}>
+                      {material?.name}
+                      <IonAvatar>
+                        <img alt={material?.name} src={material.texture}/>
+                      </IonAvatar>
+                    </IonCard>)
+                })}
+                <IonCard className={'materials-card materials-card-add'} onClick={() => {
                   setShowModal(!showModal)
                 }}>
                   <IonAvatar>
@@ -242,6 +285,7 @@ const Create: React.FC = () => {
                   />
                   <IonButton shape="round" fill="outline" onClick={() => {
                     setClick(!click)
+                    setShowBoxModal(!showBoxModal)
                     console.log(boxContext.box)
                   }}>Save</IonButton>
                 </form>
@@ -254,10 +298,9 @@ const Create: React.FC = () => {
                 <BridgeProvider value={{...boxContext}}>
                   <Suspense fallback={null}>
                     <ambientLight intensity={4}/>
-
                     <group>
 
-                      {toggle === 'square' ?
+                      {boxContext.box.type === 'square' ?
 
                         <Square click={click} box={boxContext.box} scale={[1.2, 1.2, 1.2]} position={[0, 0, 0]}/>
                         :
@@ -265,7 +308,6 @@ const Create: React.FC = () => {
                       }
                       <Floor/>
                     </group>
-
                     <OrbitControls maxDistance={20} enablePan={false} minPolarAngle={0} maxPolarAngle={1.5}
                                    rotation={[0, 1, 2]}/>
                   </Suspense>
@@ -275,6 +317,61 @@ const Create: React.FC = () => {
           </IonRow>
         </IonGrid>
       </IonContent>
+      <IonModal isOpen={showBoxModal} cssClass='my-custom-class'>
+        <IonCard>
+          <IonCardHeader>
+            <IonCardTitle>SAVE BOX</IonCardTitle>
+          </IonCardHeader>
+            <IonList>
+              <IonItem>
+                <IonAvatar slot="start">
+                  <IonImg src={boxContext.box.previewImg} />
+                </IonAvatar>
+              </IonItem>
+              {/*<IonListHeader>*/}
+              {/*  {boxContext.box.name}*/}
+              {/*</IonListHeader>*/}
+              <IonItem>
+                <IonLabel>WIDTH</IonLabel>
+                <IonLabel>{boxContext.box.width}</IonLabel>
+              </IonItem>
+              <IonItem>
+                <IonLabel>HEIGHT</IonLabel>
+                <IonLabel>{boxContext.box.height}</IonLabel>
+              </IonItem>
+              <IonItem>
+                <IonLabel>LENGTH</IonLabel>
+                <IonLabel>{boxContext.box.length}</IonLabel>
+              </IonItem>
+              <IonItem>
+                <IonLabel>X-SCALE</IonLabel>
+                <IonLabel>{boxContext.box.textureScaleX}</IonLabel>
+              </IonItem>
+              <IonItem>
+                <IonLabel>Y-SCALE</IonLabel>
+                <IonLabel>{boxContext.box.textureScaleY}</IonLabel>
+              </IonItem>
+              {/*<IonItem>*/}
+              {/*  <IonLabel>X-OFFSET</IonLabel>*/}
+              {/*  <IonLabel>{boxContext.box.textureOffsetX}</IonLabel>*/}
+              {/*</IonItem>*/}
+              {/*<IonItem>*/}
+              {/*  <IonLabel>Y-OFFSET</IonLabel>*/}
+              {/*  <IonLabel>{boxContext.box.textureOffsetY}</IonLabel>*/}
+              {/*</IonItem>*/}
+              <IonItem>
+                <IonAvatar>
+                  <img src = {boxContext.box.material.texture}/>
+                </IonAvatar>
+                <IonLabel>{boxContext.box.material.name}</IonLabel>
+
+              </IonItem>
+
+            </IonList>
+            <IonButton fill="outline" slot="end">View</IonButton>
+        </IonCard>
+        <IonButton onClick={() => setShowBoxModal(false)}>Close Modal</IonButton>
+      </IonModal>
       <IonModal isOpen={showModal} cssClass='my-custom-class'>
         <IonItem>
           <IonLabel position="floating">NAME</IonLabel>
@@ -293,8 +390,7 @@ const Create: React.FC = () => {
           const formData = new FormData();
           formData.append('name', name);
           formData.append('user', user);
-          {/*@ts-ignore*/}
-          formData.append('texture', texture);
+          formData.append('texture', texture as string);
           axios({
             method: 'post',
             url: `${API}/material/create`,
@@ -303,10 +399,9 @@ const Create: React.FC = () => {
           })
             .then(function (response) {
               //handle success
-              console.log(response.data.material);
-              let tempMaterial = response.data.material
+              const tempMaterial = response.data.material
               tempMaterial.texture = `${API}/photo/${tempMaterial?.texture}`
-              setMaterials([...materials, tempMaterial])
+              setUserMaterials([...userMaterials, tempMaterial])
             })
             .catch(function (error) {
               setError(error.response.data.error);

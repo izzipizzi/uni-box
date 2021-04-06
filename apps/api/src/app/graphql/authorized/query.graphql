@@ -2,7 +2,7 @@ type Query {
 #  material
     getMaterialById(_id: String!): Material
     getMaterials: [Material!]!
-  getAllMaterialsByUser(id:String): [Material!]!
+    getAllMaterialsByUser(id:String): [Material!]!
 
 #  box
   getBoxById(_id:String):Box

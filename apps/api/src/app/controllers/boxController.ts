@@ -1,5 +1,5 @@
-const express = require('express')
-const router = express.Router()
+import * as express from 'express';
+const router = express.Router();
 const Material = require('../models/material')
 const Photo = require('../models/image')
 // const formidable = require('formidable')

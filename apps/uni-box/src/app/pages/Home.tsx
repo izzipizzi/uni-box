@@ -40,7 +40,6 @@ const Home: React.FC = ({user}:any) => {
 
         </IonHeader>
         <img src={boxContext.box.previewImg}/>
-        {/*<ExploreContainer name="Tab 2 page" />*/}
       </IonContent>
     </IonPage>
   );
