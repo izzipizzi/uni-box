@@ -1,3 +1,5 @@
-type Query {
-  getXyi:String!
+type Query{
+  getPublicValidatedBoxes:[PublicBox!]
+
 }
+

@@ -1,6 +1,6 @@
 import { MESSAGE_UNAUTHORIZED, MESSAGE_YOU_DONT_HAVE_REQUIRED_PERMISSIONS } from '../helpers/messages';
 // import { isAllowed } from "./access-control/access-control.middleware";
-import { IContext, IMiddlewareCheckInputType } from '../interfaces/middleware.check.interface';
+import { IContext, IMiddlewareCheckInputType } from '../../../../../libs/models/middleware.check.interface';
 import { isAdmin } from './access-control/access-control.middleware';
 
 export enum MiddlewareType {

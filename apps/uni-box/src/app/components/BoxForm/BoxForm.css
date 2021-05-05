@@ -1,0 +1,42 @@
+.color-container{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 15px;
+}
+.circle-picker{
+  width: 100%!important;
+  margin: 0;
+
+}
+.buttons-container{
+  padding: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+}
+.btn-full{
+  width: 100%;
+}
+
+.form-wrapper{
+  margin: 0 15px;
+  margin-bottom: 15px;
+  padding: 35px;
+  height: max-content;
+  border-radius: 26px;
+  background: #28282d;
+  box-shadow:  -5px 5px 10px #1c1c20,
+  5px -5px 10px #34343b;
+}
+
+
+
+.item-label{
+  font-size: 18px;
+  color: white;
+}
+ion-label{
+  color: white
+}

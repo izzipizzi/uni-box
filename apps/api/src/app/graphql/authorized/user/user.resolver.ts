@@ -1,7 +1,7 @@
 import UserQueryService from "./user.query.service";
 import UserMutationService from "./user.mutation.service";
 import {middlewareCheck, MiddlewareType} from "../../../middlewares/middleware.check";
-import {UserRoles} from "../../../interfaces/UserRoles";
+import {UserRoles} from "../../../../../../../libs/enums/UserRoles";
 
 const userQueryService = new UserQueryService();
 const userMutationService = new UserMutationService();

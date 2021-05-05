@@ -6,7 +6,9 @@ type Query {
 
 #  box
   getBoxById(_id:String):Box
-  getBoxesByUser(userId:ID!):[Box!]
+  getBoxesByUser(userId:String!):[Box!]
+  getPublicNoValidatedBoxes:[PublicBox!]
+  getPublicValidatedBoxes:[PublicBox!]
 
 #  user
   getUserByToken(token: String!):User!,

@@ -1,33 +1,22 @@
 import React, {createContext, useReducer} from 'react';
+import { defaultBox } from '../constatnts';
+
 
 const initialState = {
-  box: {
-    name: '',
-    width: 100,
-    type: 'square',
-    height: 100,
-    length: 100,
-
-    color: '',
-    loading: true,
-    material: {
-      _id: '',
-      name: '',
-      texture: '',
-
-    },
-    textureScaleX: 100,
-    textureScaleY: 100,
-    textureOffsetX: 100,
-    textureOffsetY: 100,
-    previewImg: ''
-  }
+  box: defaultBox,
+  boxes:[],
+  publicBoxes:[]
 };
-
-
 const BoxContext = createContext({
   box: null,
+  boxes: null,
+  publicBoxes:null,
+
   setBox: (box) => {
+  },
+  setBoxes: (boxes) => {
+  },
+  setPublicBoxes: (boxes) => {
   },
 });
 
@@ -37,6 +26,16 @@ function boxReducer(state, action) {
       return {
         ...state,
         box: action.payload
+      };
+    case 'SET_BOXES':
+      return {
+        ...state,
+        boxes: action.payload
+      };
+      case 'SET_PUBLIC_BOXES':
+      return {
+        ...state,
+        publicBoxes: action.payload
       };
     default:
       return state;
@@ -53,12 +52,29 @@ function BoxProvider(props) {
       payload: boxData
     });
   }
+  function setBoxes(boxesData) {
+    dispatch({
+      type: 'SET_BOXES',
+      payload: boxesData
+    });
+  }
+
+  function setPublicBoxes(boxesData) {
+    dispatch({
+      type: 'SET_PUBLIC_BOXES',
+      payload: boxesData
+    });
+  }
+
 
   return (
     <BoxContext.Provider
       value={
         {
-          box: state.box, setBox
+          box: state.box,
+          boxes: state.boxes,
+          publicBoxes: state.publicBoxes,
+          setBox, setBoxes,setPublicBoxes
         }
       }
       {...props}

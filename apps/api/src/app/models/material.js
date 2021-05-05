@@ -15,8 +15,11 @@ const materialSchema = new mongoose.Schema({
   user:{
     type: ObjectId,
     ref: 'User'
-  }
-
+  },
+  price:{
+    type: Number,
+    default: 100
+  },
 
 
 

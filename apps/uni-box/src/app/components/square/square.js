@@ -27,6 +27,7 @@ export default function Rounded(props) {
 
   texture.repeat.set(boxContext.box.textureScaleY/1000,boxContext.box.textureScaleX/1000);
   texture.offset.set(boxContext.box.textureOffsetY/1000,boxContext.box.textureOffsetX/1000);
+  texture.rotation = boxContext.box.textureRotation/100
 
   texture.flipY = normalTexture.flipY = true;
   texture.encoding = 3001;

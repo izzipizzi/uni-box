@@ -8,7 +8,7 @@ const boxSchema = new mongoose.Schema({
   },
   model: {
     type: String,
-    enum: ['SQUARE', 'ROUND', 'HEART'],
+    enum: ['SQUARE', 'ROUNDED', 'HEART'],
     default: 'SQUARE',
     required: true,
   },
@@ -45,15 +45,19 @@ const boxSchema = new mongoose.Schema({
     default: 20,
 
   },
+  price: {
+    type: Number,
+    default: 20,
+
+  },
   user: {
     type: ObjectId,
+    ref:'User',
     required: true
   },
   textureScaleX:{
     type: Number,
     required: true,
-
-
   },
   textureScaleY:{
     type: Number,
@@ -71,9 +75,28 @@ const boxSchema = new mongoose.Schema({
     required: true
 
   },
+  textureRotation:{
+    type: Number,
+    default :0,
+    required: true
+
+  },
   previewImg:{
     type: ObjectId,
     ref: 'Photo',
+
+  },
+  validated:{
+    type: Boolean,
+    default:false
+  },
+  public:{
+    type: Boolean,
+    default:false
+  },
+  declined:{
+    type: Boolean,
+    default:false
   }
 
 }, {

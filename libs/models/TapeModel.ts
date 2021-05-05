@@ -1,10 +1,10 @@
-import {TapePositionModel} from "./TapePositionModel";
+import {TapePositionEnum} from "../enums/TapePositionEnum";
 
 export interface ITape {
   _id: string,
   name: string,
   color: string,
-  position: TapePositionModel,
+  position: TapePositionEnum,
   width: number
 
 }

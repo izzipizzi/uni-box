@@ -1,7 +1,7 @@
 import { MESSAGE_INVALID_PARAMETER } from "../../../helpers/messages";
-import {IBox} from "../../../interfaces/BoxModel";
+import {IBox} from "../../../../../../../libs/models/BoxModel";
 import Box from '../../../models/box'
-import {IUser} from "../../../interfaces/UserModel";
+import {IUser} from "../../../../../../../libs/models/UserModel";
 import User from '../../../models/user'
 const jwt = require('jsonwebtoken')
 

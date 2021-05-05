@@ -10,10 +10,12 @@ import * as bodyParser from 'body-parser';
 import {generateMiddlewareGraphql} from "./app/middlewares/graphql-express/graphql-express.middleware";
 import AuthMiddleware from "./app/middlewares/auth/auth.middleware";
 import { ApolloServer, gql } from 'apollo-server-express';
+import materialController from "./app/controllers/materialController";
+import boxController from "./app/controllers/boxController";
 
 
 const mongoose = require('mongoose')
-const materialController =  require('./app/controllers/materialController')
+
 
 
 const start = async () => {
@@ -27,6 +29,7 @@ const start = async () => {
   app.use(bodyParser.json());
   app.use( bodyParser.urlencoded({ extended: true }));
 
+  
   const local = true;
   require("dotenv").config()
   mongoose.connect(local ? process.env.MONGODB_URI_LOCAL : process.env.MONGODB_URI, {
@@ -42,6 +45,7 @@ const start = async () => {
   app.use(morgan());
 
   app.use('/api', materialController)
+  app.use('/api', boxController)
 
   app.post(API_PATH,
     [

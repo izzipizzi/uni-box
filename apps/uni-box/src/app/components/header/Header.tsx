@@ -6,14 +6,13 @@ import {
   IonItem,
   IonLabel,
   IonList,
-  IonPopover,
+  IonPopover, IonRouterLink,
   IonTitle,
   IonToolbar
-} from '@ionic/react'
+} from '@ionic/react';
 import React, { useContext, useEffect, useState } from 'react';
 import {ellipsisVerticalOutline} from "ionicons/icons";
 import {Redirect, useHistory} from "react-router-dom";
-import {userLogout} from "../../service/auth.service";
 import { AuthContext } from '../../context/auth';
 
 
@@ -44,6 +43,7 @@ const Header = (props) => {
         <IonTitle>
           {context?.user ? context?.user?.name : null} Welcome to UniBox
         </IonTitle>
+
       </IonToolbar>
 
       <IonPopover
@@ -52,21 +52,20 @@ const Header = (props) => {
         isOpen={popoverState.showPopover}
         onDidDismiss={() => setShowPopover({showPopover: false, event: undefined})}
       >
-        <IonList>
-          <IonItem button onClick={() => {
+        <IonList class={'menu'}>
+          <IonItem class={'menu-item'} button onClick={() => {
           }}>
-            <IonLabel>
-              щось там
-            </IonLabel>
+            <IonRouterLink className={'router-link'} routerLink={'gifts'}>
+              Підібрати подарунок
+            </IonRouterLink>
           </IonItem>
-          <IonItem button onClick={() => {
-          }}>
-            <IonLabel>
-              дізнтися більше
-            </IonLabel>
-          </IonItem>
+          {!context?.user &&  <IonItem class={'menu-item'}>
+            <IonRouterLink className={'router-link'} routerLink={'signup'}>
+              Створити аккаунт
+            </IonRouterLink>
+          </IonItem>}
           {
-            !context?.user ? null : (<IonItem button  onClick={()=>{
+            !context?.user ? null : (<IonItem class={'menu-item'} button  onClick={()=>{
               context.logout()
               setShowPopover({showPopover: false, event: undefined})
               history.push('/auth')

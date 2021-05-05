@@ -27,6 +27,8 @@ export default function Rounded(props) {
 
   texture.repeat.set(boxContext.box.textureScaleY/1000,boxContext.box.textureScaleX/1000);
   texture.offset.set(boxContext.box.textureOffsetY/1000,boxContext.box.textureOffsetX/1000);
+  texture.rotation = boxContext.box.textureRotation/100
+
 
   texture.flipY = normalTexture.flipY = true;
   texture.encoding = 3001;
@@ -49,7 +51,7 @@ export default function Rounded(props) {
   useEffect(()=>{
     boxContext.setBox({...boxContext.box,previewImg: camera.gl.domElement.toDataURL()})
 
-  },[boxContext.click])
+  },[props.click])
   return (
     <group ref={group} {...boxContext} dispose={null}>
       <animated.mesh

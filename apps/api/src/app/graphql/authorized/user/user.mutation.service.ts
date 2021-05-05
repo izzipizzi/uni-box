@@ -1,7 +1,7 @@
 import Box from '../../../models/box'
 import User from '../../../models/user'
-import {IBox} from "../../../interfaces/BoxModel";
-import {IMaterial} from "../../../interfaces/MaterialModel";
+import {IBox} from "../../../../../../../libs/models/BoxModel";
+import {IMaterial} from "../../../../../../../libs/models/MaterialModel";
 
 export default class UserMutationService {
   deleteById(_id: number): string {

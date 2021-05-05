@@ -1,4 +1,4 @@
-export enum TapePositionModel{
+export enum TapePositionEnum{
   SQUARE= "SQUARE",
   ROUND = "ROUND",
   HEART = "HEART"

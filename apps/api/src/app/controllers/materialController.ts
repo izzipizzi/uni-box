@@ -1,16 +1,18 @@
-
-const express = require('express')
-const router = express.Router()
+import * as express from 'express';
+import {IPhoto} from "../../../../../libs/models/PhotoModel";
+const router = express.Router();
 const Material = require('../models/material')
 const Photo = require('../models/image')
 const formidable = require('formidable')
 const fs = require('fs')
 
-router.get('/photo/:photoId', (req, res, next) => {
-  if (req.photo.data) {
-    const {contentType} = req.photo;
-    res.set('Content-Type', contentType)
-    return res.send(req.photo.data)
+router.get('/photo/:photoId', (req:express.Request, res:express.Response, next:express.NextFunction) => {
+ const photo:IPhoto = req.body
+
+  if (photo.data) {
+    const {contentType} = photo;
+    res.set('Content-Type', contentType as string)
+    return res.send(photo.data)
   }
   next();
 })
@@ -62,17 +64,17 @@ router.post('/material/create',(req,res)=>{
 
 })
 
-router.param('photoId', (req, res, next, id) => {
+router.param('photoId', (req:any, res, next, id: string) => {
   Photo.findById(id).exec((err, photo) => {
     if (err || !photo) {
       return res.status(400).json({
         error: "IMAGE_NOT_FOUND"
       })
     }
-    req.photo = photo
+    req.body = photo
     next()
   })
 
 })
 
-module.exports = router
+export default router

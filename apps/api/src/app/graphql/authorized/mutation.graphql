@@ -5,7 +5,8 @@ type Mutation {
 
   #  box
   deleteBoxById(id:ID!):String
-  createBox(userId:ID!):Box
+  validateBox(boxId:ID!):String
+  declineBox(boxId:ID!):String
   updateBoxById(id:ID,box:InputBox): Box
 }
 

@@ -1,0 +1,8 @@
+.my-boxes-container{
+  padding:25px ;
+  padding-top: 40px;
+  display: grid;
+  grid-auto-rows: 1fr;
+  grid-template-columns: repeat(5,1fr);
+  grid-gap: 2vw;
+}

@@ -1,0 +1,56 @@
+.ion-row{
+  height: 100%;
+  padding: 0;
+
+}
+
+.ion-grid{
+  height: 100%;
+  /*background: #e0ac08;*/
+  padding: 0;
+
+}
+.ion-col{
+  max-width: 50%;
+  height: 100%;
+  overflow-y: scroll;
+}
+
+.canvas{
+  height: 100%;
+  overflow: hidden;
+  padding: 0;
+}
+
+.materials{
+  overflow-x: auto;
+  overflow-y: auto;
+  white-space: nowrap;
+}
+
+.materials-card-add{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 80px;
+  overflow: hidden;
+}
+
+.defaultMaterials {
+  display: flex;
+  flex-wrap: nowrap;
+  overflow-x: auto;
+}
+.userMaterials{
+  display: flex;
+  flex-wrap: nowrap;
+  overflow-x: auto;
+}
+.materials-card{
+  flex: 0 0 auto;
+
+}
+.edit-page{
+  height: 85vh;
+}

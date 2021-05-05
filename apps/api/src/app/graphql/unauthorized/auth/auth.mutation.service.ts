@@ -34,9 +34,6 @@ export default class AuthMutationService {
     auth_response.user = null
       auth_response.error= 'NO_USER'
     }
-    console.log('user')
-    console.log(user)
-    console.log('user')
 
     return auth_response
   }

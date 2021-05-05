@@ -1,7 +1,7 @@
-import {UserModel} from "./UserModel";
+import {IUser} from "./UserModel";
 
 export interface LoginResponseModel {
   token?: string,
-  user?: UserModel,
+  user?: IUser,
   error?: string,
 }

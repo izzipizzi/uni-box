@@ -1,5 +1,5 @@
 import * as  express from 'express';
-import { IUser } from '../../interfaces/UserModel';
+import { IUser } from '../../../../../../libs/models/UserModel';
 import User from '../../models/user';
 
 const jwt = require('jsonwebtoken');
@@ -23,11 +23,8 @@ export const AuthMiddleware = async (request, response, next: express.NextFuncti
      user_id = decoded['user']._id;
 
     }catch (e){
-      console.log(e)
       return response.status(500).json({err:'Token expired', e})
     }
-    // console.log(decoded);
-
 
     const user: IUser = User.findById(user_id);
 

@@ -2,3 +2,181 @@
 .he{
   backdrop-filter: blur();
 }
+
+.ion-page{
+  height: 100vh;
+  position: relative!important;
+  background: #28282d;
+  color: #cecece;
+
+}
+.header{
+  height: 8vh;
+}
+ion-content{
+  --background: #28282d;
+}
+ion-segment{
+  --background: #28282d;
+}
+ion-header{
+  color: #cecece;
+}
+ion-toolbar{
+  --background: #28282d;
+  color: #cecece;
+
+}
+ion-tab-bar{
+  --background: #28282d;
+  }
+
+.box-select-mode-modal .modal-wrapper{
+  --border-radius:16px;
+    --min-width: 38%;
+    --width: max-content;
+    --min-height: 16%;
+    --height: max-content;
+  --background: #28282d;
+
+}
+.box-select-mode-modal .modal-wrapper .ion-page{
+    width: 100%;
+    height: 100%;
+}
+.box-save-modal .modal-wrapper{
+  --border-radius:16px;
+    --width: 30%;
+    --height: max-content;
+    padding: 15px;
+  --background: #28282d;
+
+}
+.box-save-modal .modal-wrapper .ion-page{
+    width: 100%;
+    height: 100%;
+}
+.material-modal .modal-wrapper{
+  --border-radius:16px;
+    --width: 50%;
+    --height: 50%;
+    padding: 15px;
+  --background: #28282d;
+}
+.material-modal .modal-wrapper .ion-page{
+    width: 100%;
+    height: 100%;
+}
+
+.input-container{
+  --placeholder-color: #cecece;
+  --color: #cecece;
+  color: #cecece;
+  /*placeholder-color: #cecece;*/
+  --border-radius: 10px;
+  --background: none;
+}
+.input-item-container{
+  border-radius: 12px;
+  background: #28282d;
+  box-shadow: inset -5px 5px 74px #1c1c20,
+  inset 5px -5px 74px #34343b;
+  padding: 5px 10px 5px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+.form-item-container{
+  border-radius: 20px;
+  padding: 5px 10px 5px;
+  margin-bottom: 20px;
+}
+.item-label{
+  --color: #656565;
+  color: #656565;
+
+}
+.item-native{
+  padding-inline-start:0;
+}
+.materials-card{
+  margin-right: 15px;
+}
+.defaultMaterials{
+  overflow-y: hidden;
+  padding: 15px;
+}
+.userMaterials{
+  padding: 15px;
+
+  overflow-y: hidden;
+
+}
+
+.box-segment-container{
+  background: #28282d;
+  margin:  15px;
+  padding: 5px;
+  height: max-content;
+  border-radius: 26px;
+  box-shadow:  -5px 5px 10px #1c1c20,
+  5px -5px 10px #34343b;
+}
+
+.box-segment-button{
+  color: dodgerblue;
+  --color: #cecece;
+  --color-focused: black;
+  --color-checked: black;
+  height: 40px;
+  --border-radius:26px
+}
+.add_icon{
+  width: 100%;
+  height: 100%;
+  color: #cecece;
+}
+.input-file{
+  opacity: 0;
+  position: absolute;
+  z-index: -1;
+}
+.input-file-label{
+  border: 2px solid dodgerblue;
+  padding: 10px 5px;
+  border-radius: 50px;
+  text-align: center;
+}
+
+
+input {
+  color: #cecece;
+}
+
+.list-item{
+  padding: 10px;
+  display: flex;
+flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+ion-avatar{
+  border: 1px solid #cecece;
+}
+
+.box-save-img{
+  margin-right: 15px;
+  margin-left: 15px;
+}
+.admin-input{
+  margin-top: 30px;
+  margin-bottom: 10px;
+}
+
+.menu{
+  background: #2a2a2a;
+
+}
+.menu-item{
+  --background: #2a2a2a;
+}

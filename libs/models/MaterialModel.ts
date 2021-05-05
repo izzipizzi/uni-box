@@ -1,4 +1,8 @@
-export interface MaterialModel {
+import {IUser} from "./UserModel";
+
+export interface IMaterial {
+  _id: string,
   name: string,
-  texture: string
+  texture: string,
+  user?: IUser
 }

@@ -5,6 +5,7 @@ export const GET_MATERIALS = gql`
     getMaterials{
       _id
       name
+      price
       texture
     }
   }

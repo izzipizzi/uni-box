@@ -6,9 +6,6 @@ const authQueryService = new AuthQueryService();
 
 const authResolver = {
   Query: {
-    getXyi(){
-      return 'xyi'
-    }
 
   },
   Mutation:{

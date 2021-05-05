@@ -1,0 +1,38 @@
+.box-card{
+  width: auto;
+  height: 140px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+  border: 1px solid grey;
+  border-radius: 20px;
+  padding: 10px;
+  font-style: normal;
+}
+a{  text-decoration: none;
+}
+.box-preview{
+  border: 2px solid grey;
+}
+
+.card-header{
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+.author-container{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+  width: 100%;
+
+}
+.author-container span{
+  margin-right: 10px;
+  color: #f2f2f2;
+}
+

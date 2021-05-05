@@ -1,6 +1,6 @@
 
-import {IUser} from "../../interfaces/UserModel";
-import {UserRoles} from "../../interfaces/UserRoles";
+import {IUser} from "../../../../../../libs/models/UserModel";
+import {UserRoles} from "../../../../../../libs/enums/UserRoles";
 
 export const isAdmin = (user: IUser): boolean => {
   if (!user){

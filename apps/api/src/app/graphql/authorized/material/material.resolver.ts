@@ -1,7 +1,7 @@
 import MaterialQueryService from './material.query.service';
 import MaterialMutationService from './material.mutation.service';
 import { middlewareCheck, MiddlewareType } from '../../../middlewares/middleware.check';
-import { UserRoles } from '../../../interfaces/UserRoles';
+import { UserRoles } from '../../../../../../../libs/enums/UserRoles';
 
 const materialQueryService = new MaterialQueryService();
 const materialMutationService = new MaterialMutationService();

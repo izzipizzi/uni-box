@@ -15,8 +15,6 @@ const unauthorizedGraphql = glob.sync('./apps/api/src/app/graphql/unauthorized/*
 
 export const generateTypeDefinitions = (definitionType) => {
     const toGenerate = definitionType === TypeDefinition.Authorized ? authorizedGraphql : unauthorizedGraphql;
-
-    console.log(toGenerate)
     return toGenerate.map((item) =>  readFileSync(item).toString()).join('');
 };
 

@@ -1,4 +1,4 @@
-import {IMaterial} from '../../../interfaces/MaterialModel';
+import {IMaterial} from '../../../../../../../libs/models/MaterialModel';
 import Material from '../../../models/material';
 // import * as path from "path";
 // import {match} from "cypress/types/minimatch";

@@ -3,7 +3,7 @@ import { Redirect, Route } from 'react-router-dom';
 import { IonApp, IonIcon, IonLabel, IonRouterOutlet, IonTabBar, IonTabButton, IonTabs } from '@ionic/react';
 import { IonReactRouter } from '@ionic/react-router';
 import { ellipse, square, triangle } from 'ionicons/icons';
-import Home from './pages/Home';
+import Home from './pages/Home/Home';
 import Create from './pages/Create/Create';
 import { createUploadLink } from 'apollo-upload-client';
 import { ApolloClient, ApolloProvider, InMemoryCache } from '@apollo/client';
@@ -34,12 +34,21 @@ import PrivateRoute from './utils/PrivateRoute';
 import AdminRoute from './utils/AdminRoute';
 import { AuthContext } from './context/auth';
 import { GRAPHQL } from './constatnts';
+import MyBoxes from './pages/MyBoxes/MyBoxes';
+import { UIContext } from './context/ui-context';
+import Edit from './pages/Edit/Edit';
+import { ErrorToast } from './components/Error';
+import { NavContext } from './context/nav-context';
+import { SuccessToast } from './components/Succes';
+import { ViewBox } from './pages/ViewBox/ViewBox';
+import Register from './pages/Auth/Register';
+import { Gift } from './pages/Gift/Gift';
 
 
 const App: React.FC = (props) => {
 
   const { user, getToken } = useContext(AuthContext);
-
+  const nav  = useContext(NavContext);
 
   const link = createUploadLink({
     uri: GRAPHQL, headers: {
@@ -64,8 +73,13 @@ const App: React.FC = (props) => {
           <IonTabs>
             <IonRouterOutlet>
               <AuthRoute exact path={'/auth'} component={Auth} />
+              <AuthRoute exact path={'/signup'} component={Register} />
               <PrivateRoute exact path='/create' component={Create} />
+              <PrivateRoute exact path='/edit' component={Edit} />
+              <PrivateRoute exact path='/my' component={MyBoxes} />
               <Route path='/home' component={Home} exact={true} />
+              <Route path='/gifts' component={Gift} exact={true} />
+              <Route exact path='/view-box' component={ViewBox}  />
               <AdminRoute path='/admin' component={Admin} exact={true} />
               <Route path='/' render={() => <Redirect to='/home' />} exact={true} />
             </IonRouterOutlet>
@@ -73,30 +87,45 @@ const App: React.FC = (props) => {
               {user ? null : (
                 <IonTabButton tab='auth' href='/auth'>
                   <IonIcon icon={triangle} />
-                  <IonLabel>Authorize</IonLabel>
+                  <IonLabel>Увійти</IonLabel>
                 </IonTabButton>
               )}
               <IonTabButton tab='home' href='/home'>
                 <IonIcon icon={ellipse} />
-                <IonLabel>Home</IonLabel>
+                <IonLabel>Домашня сторінка</IonLabel>
               </IonTabButton>
               {user ? (
                 <IonTabButton tab='create' href='/create'>
                   <IonIcon icon={square} />
-                  <IonLabel>Create</IonLabel>
+                  <IonLabel>Створити</IonLabel>
                 </IonTabButton>
+              ) : null}
+              {user ? (
+
+                <IonTabButton tab='my-boxes' href='/my'>
+                  <IonIcon icon={square} />
+                  <IonLabel>Мої коробки</IonLabel>
+                </IonTabButton>
+
               ) : null}
 
               {user?.role === 'ADMIN' ? (
                 <IonTabButton tab='admin' href='/admin'>
                   <IonIcon icon={square} />
-                  <IonLabel>Admin</IonLabel>
+                  <IonLabel>Адмнінстраторська панель</IonLabel>
                 </IonTabButton>
               ) : null}
             </IonTabBar>
           </IonTabs>
-        </IonReactRouter>
+          {nav.isToMyBoxes && <Redirect to={'my'}/>}
+          {nav.isToAdmin && <Redirect to={'admin'}/>}
+          {nav.isToHome && <Redirect to={'home'}/>}
 
+        </IonReactRouter>
+        {/*Error handle*/}
+        <ErrorToast/>
+        {/*Success handle*/}
+        <SuccessToast/>
       </IonApp>
     </ApolloProvider>
   );

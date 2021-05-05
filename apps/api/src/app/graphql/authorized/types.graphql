@@ -1,7 +1,8 @@
 type Material {
     _id: ID!
-    name: String!
-    texture: String!
+    name: String
+    price: Float
+    texture: String
 }
 type User {
   _id: ID!
@@ -12,16 +13,48 @@ type User {
 }
 
 type Box{
+  _id: ID!
   name: String!
   model: ModelEnum!
   tape : Tape
-  material:String!
+  price: Int
+  material:Material!
   color:String!
   width: Float!
   length: Float!
   height: Float!
   user: ID!
-
+  textureScaleX:Int
+  textureScaleY:Int
+  textureOffsetX:Int
+  textureOffsetY:Int
+  previewImg: String
+  textureRotation:Int
+  validated:Boolean
+  public:Boolean
+  declined:Boolean
+}
+type PublicBox{
+  _id: ID!
+  name: String!
+  model: ModelEnum!
+  tape : Tape
+  material:Material!
+  color:String!
+  width: Float!
+  length: Float!
+  height: Float!
+  user: User!
+  textureScaleX:Int
+  textureScaleY:Int
+  textureOffsetX:Int
+  textureOffsetY:Int
+  previewImg: String
+  textureRotation:Int
+  validated:Boolean
+  public:Boolean
+  declined:Boolean
+  price:Int
 }
 
 type Tape {
@@ -40,7 +73,7 @@ enum TapePositionEnum {
 
 enum ModelEnum {
   SQUARE,
-  ROUND,
+  ROUNDED,
   HEART
 
 }

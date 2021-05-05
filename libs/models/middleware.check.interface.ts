@@ -1,4 +1,4 @@
-import { MiddlewareType } from "../middlewares/middleware.check";
+import { MiddlewareType } from "../../apps/api/src/app/middlewares/middleware.check";
 import {IUser} from "./UserModel";
 
 export interface IMiddlewareCheckInputType {

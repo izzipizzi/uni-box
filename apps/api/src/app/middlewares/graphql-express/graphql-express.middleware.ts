@@ -1,7 +1,7 @@
 import { graphqlExpress } from "apollo-server-express/dist/expressApollo";
 import { Request } from "express";
 import { generateSchema } from "../../graphql/schema.generator";
-import { IContext } from "../../interfaces/middleware.check.interface";
+import { IContext } from "../../../../../../libs/models/middleware.check.interface";
 
 export const generateMiddlewareGraphql = () => {
   return graphqlExpress(
