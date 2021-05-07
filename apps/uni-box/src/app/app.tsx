@@ -7,6 +7,8 @@ import Home from './pages/Home/Home';
 import Create from './pages/Create/Create';
 import { createUploadLink } from 'apollo-upload-client';
 import { ApolloClient, ApolloProvider, InMemoryCache } from '@apollo/client';
+import { T } from 'react-translator-component';
+
 
 /* Core CSS required for Ionic components to work properly */
 import '@ionic/react/css/core.css';
@@ -87,24 +89,24 @@ const App: React.FC = (props) => {
               {user ? null : (
                 <IonTabButton tab='auth' href='/auth'>
                   <IonIcon icon={triangle} />
-                  <IonLabel>Увійти</IonLabel>
+                  <IonLabel>{T('LOGIN')}</IonLabel>
                 </IonTabButton>
               )}
               <IonTabButton tab='home' href='/home'>
                 <IonIcon icon={ellipse} />
-                <IonLabel>Домашня сторінка</IonLabel>
+                <IonLabel>{T('HOME')}</IonLabel>
               </IonTabButton>
               {user ? (
                 <IonTabButton tab='create' href='/create'>
                   <IonIcon icon={square} />
-                  <IonLabel>Створити</IonLabel>
+                  <IonLabel>{T('CREATE')}</IonLabel>
                 </IonTabButton>
               ) : null}
               {user ? (
 
                 <IonTabButton tab='my-boxes' href='/my'>
                   <IonIcon icon={square} />
-                  <IonLabel>Мої коробки</IonLabel>
+                  <IonLabel>{T('MY_BOXES')}</IonLabel>
                 </IonTabButton>
 
               ) : null}
@@ -112,7 +114,7 @@ const App: React.FC = (props) => {
               {user?.role === 'ADMIN' ? (
                 <IonTabButton tab='admin' href='/admin'>
                   <IonIcon icon={square} />
-                  <IonLabel>Адмнінстраторська панель</IonLabel>
+                  <IonLabel>{T('ADMIN')}</IonLabel>
                 </IonTabButton>
               ) : null}
             </IonTabBar>

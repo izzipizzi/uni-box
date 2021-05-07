@@ -17,7 +17,7 @@ type Box{
   name: String!
   model: ModelEnum!
   tape : Tape
-  price: Int
+  price: Float
   material:Material!
   color:String!
   width: Float!
@@ -54,7 +54,7 @@ type PublicBox{
   validated:Boolean
   public:Boolean
   declined:Boolean
-  price:Int
+  price:Float
 }
 
 type Tape {

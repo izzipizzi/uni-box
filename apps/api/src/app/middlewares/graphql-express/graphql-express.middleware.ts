@@ -20,11 +20,11 @@ export const generateMiddlewareGraphql = () => {
           user: request.user
         })
       }
+
       return Object.assign({
         schema,
         context,
-        formatError: (error) => error.message
-      });
+        formatError: (error) => error.message});
 
     })
 };

@@ -9,6 +9,8 @@ import { API } from '../../constatnts';
 import { AuthContext } from '../../context/auth';
 import { addCircleOutline } from 'ionicons/icons';
 
+import ReactTooltip from "react-tooltip";
+import { T } from 'react-translator-component';
 
 export const UserMaterials = (props) => {
 
@@ -16,6 +18,8 @@ export const UserMaterials = (props) => {
   const boxContext = useContext(BoxContext);
   const ui = useContext(UIContext);
   const loginContext = useContext(AuthContext);
+
+
 
   const userMaterialRes = useQuery(GET_MATERIALS_BY_USER, {
     variables: { id: loginContext.user._id }
@@ -40,10 +44,13 @@ export const UserMaterials = (props) => {
     <IonRow className={'userMaterials'}>
       {materialContext.userMaterials.map(material => {
         return (
-          <IonAvatar className={'materials-card'} onClick={() => {
+          <IonAvatar data-tip data-for={material._id} className={'materials-card'} onClick={() => {
             boxContext.setBox({ ...boxContext.box, material, loading: false });
           }} key={material?._id}>
             <img alt={material?.name} src={material.texture} />
+            <ReactTooltip id={material?._id} place="bottom" effect="solid">
+              {material?.name} - {material.price}{T('UAH')}
+            </ReactTooltip>
           </IonAvatar>);
       })}
 

@@ -6,16 +6,13 @@ import { isAdmin } from './access-control/access-control.middleware';
 export enum MiddlewareType {
   ADMIN_CHECK,
   AUTH,
-  TOKEN
+  TOKEN,
+  LOGIN
 }
 
 export const middlewareCheck = (data: IMiddlewareCheckInputType[], context: IContext) => {
   data.forEach((item) => {
 
-    /*
-    In case you will in future implement more middlewares which should run on resolver level,
-    add them in switch case and handle situation based on values obtained from context
-    */
     switch (item.type) {
     case MiddlewareType.ADMIN_CHECK:
       if (!isAdmin(context.user)) {
@@ -26,6 +23,12 @@ export const middlewareCheck = (data: IMiddlewareCheckInputType[], context: ICon
     case MiddlewareType.AUTH:
       if (!context.isAuthenticated) {
         throw new Error(MESSAGE_UNAUTHORIZED);
+      }
+      break;
+
+      case MiddlewareType.LOGIN:
+      if (!context.error) {
+        throw new Error(context.error);
       }
       break;
 

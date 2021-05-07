@@ -3,6 +3,7 @@ import React, { useContext, useState } from 'react';
 import { AuthContext } from '../../../context/auth';
 import { useSaveMaterial } from '../../../service/api.action';
 import { UIContext } from '../../../context/ui-context';
+import { T } from 'react-translator-component';
 
 
 export const AddMaterial = () => {
@@ -46,26 +47,26 @@ export const AddMaterial = () => {
       <div className={'form-container'}>
 
       <form>
-        <IonLabel class={'item-label'} position='stacked'>Назва матеріалу</IonLabel>
+        <IonLabel class={'item-label'} position='stacked'>{T('MATERIAL_NAME')}</IonLabel>
         <div className={'input-item-container'}>
           <IonInput
             class={'input-container'}
             type={'text'} value={textures.name} onIonChange={handleTextChange('name')} />
         </div>
-        <IonLabel class={'item-label'} position='stacked'>Ціна матеріалу</IonLabel>
+        <IonLabel class={'item-label'} position='stacked'>{T('PRICE')}</IonLabel>
         <div className={'input-item-container'}>
           <IonInput
             class={'input-container'}
             type={'text'} value={textures.price} onIonChange={handleTextChange('price')} />
         </div>
         <label htmlFor={'input-file'} className={'item-label input-file-label'} >
-          Виберіть файл
+          {T('CHOOSE_FILE')}
         </label>
         <input type={'file'} onChange={handleChange('texture')} accept={'file'} id={'input-file'}
                className={'input-file admin-input'} />
 
 
-        <IonButton className={'admin-input'} expand={'full'} shape='round' fill='solid' onClick={saveMaterial}>Send</IonButton>
+        <IonButton className={'admin-input'} expand={'full'} shape='round' fill='solid' onClick={saveMaterial}>{T('SEND')}</IonButton>
       </form>
         </div>
     </IonRow>

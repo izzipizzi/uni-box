@@ -5,6 +5,8 @@ import './AdminBoxCard.css';
 import { AdminBoxContext } from '../../context/admin-box-context';
 import { API, API_PHOTOS } from '../../constatnts';
 import { BoxContext } from '../../context/box';
+import { T } from 'react-translator-component';
+
 
 const AdminBoxCard = ({ box }) => {
   const boxContext = useContext(BoxContext);
@@ -18,7 +20,6 @@ const AdminBoxCard = ({ box }) => {
   }, [box]);
   return (
     <Link onClick={async () => {
-      console.log(localBox)
       boxContext.setBox(localBox);
     }} to={'/view-box'} className={'box-card'}>
       <IonAvatar className={'box-preview'}>
@@ -26,8 +27,8 @@ const AdminBoxCard = ({ box }) => {
       </IonAvatar>
       <div className={'card-header'}>
         <div className={'card-title'}>{box.name}</div>
-        <IonBadge>{box.validated}</IonBadge>
-        <IonBadge>{box.public && 'public'}</IonBadge>
+        <IonBadge>{box.validated && T('VALID')}</IonBadge>
+        <IonBadge>{box.public && T('PUBLIC')}</IonBadge>
       </div>
       <div>
         {box.user.name}

@@ -1,7 +1,7 @@
 import React, { useContext, useEffect } from 'react';
 import { Canvas3D } from '../../components/Canvas3D/Canvas3D';
-import { IonContent, IonFab, IonFabButton, IonIcon, IonPage } from '@ionic/react';
-import { checkmarkSharp, closeSharp } from 'ionicons/icons';
+import { IonContent, IonFab, IonFabButton, IonFabList, IonIcon, IonItem, IonPage } from '@ionic/react';
+import { checkmarkSharp, closeSharp, information, logoFacebook, logoTwitter, logoYoutube } from 'ionicons/icons';
 import { AuthContext } from '../../context/auth';
 import { useMutation } from '@apollo/client';
 import { DECLINE_BOX, VALIDATE_BOX } from './mutation';
@@ -9,6 +9,7 @@ import { UIContext } from '../../context/ui-context';
 import { BoxContext } from '../../context/box';
 import { NavContext } from '../../context/nav-context';
 import { defaultBox } from '../../constatnts';
+import { T } from 'react-translator-component';
 
 
 export const ViewBox = () => {
@@ -75,6 +76,26 @@ useEffect(()=>{
     <IonPage>
       <IonContent >
       <Canvas3D>
+        <IonFab>
+        <IonFabButton ><IonIcon icon={information}/></IonFabButton>
+        <IonFabList side="end">
+          <IonItem>
+            {T('WIDTH')}  {boxContext.box.width}
+          </IonItem>
+          <IonItem>
+            {T('HEIGHT')}  {boxContext.box.height}
+          </IonItem>
+          <IonItem>
+            {T('LENGTH')}  {boxContext.box.length}
+          </IonItem >
+          <IonItem>
+            {T('PRICE')}  {boxContext.box.price}  {T('UAH')}
+          </IonItem>
+          <IonItem>
+            {T('MATERIAL')}  {boxContext.box.material.price} {T('UAH')}
+          </IonItem>
+        </IonFabList>
+        </IonFab>
         {(auth.user && auth.user.role === 'ADMIN' && boxContext.box._id !==defaultBox._id ) &&
         (
           <IonFab horizontal='end' vertical='center' slot='fixed'>

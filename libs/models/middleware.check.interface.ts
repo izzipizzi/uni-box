@@ -9,4 +9,5 @@ export interface IMiddlewareCheckInputType {
 export interface IContext {
     user: IUser,
     isAuthenticated: boolean
+  error: string,
 }

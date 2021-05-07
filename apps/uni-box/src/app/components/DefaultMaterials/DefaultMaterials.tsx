@@ -7,6 +7,8 @@ import { GET_MATERIALS } from '../../pages/Create/query';
 import { API } from '../../constatnts';
 import { BoxMode } from '../../enums/BoxMode';
 import { UIContext } from '../../context/ui-context';
+import ReactTooltip from "react-tooltip";
+import { T } from 'react-translator-component';
 
 
 export const DefaultMaterials = (props) =>{
@@ -39,10 +41,13 @@ export const DefaultMaterials = (props) =>{
     <IonRow className={'defaultMaterials'}>
       {materialContext.defaultMaterials.map(material => {
         return (
-          <IonAvatar className={'materials-card'} onClick={() => {
+          <IonAvatar data-tip data-for={material._id} className={'materials-card'} onClick={() => {
             boxContext.setBox({...boxContext.box, material, loading: false})
           }} key={material?._id}>
               <img alt={material?.name} src={material.texture}/>
+            <ReactTooltip id={material?._id} place="bottom" effect="solid">
+              {material?.name} - {material.price}{T('UAH')}
+            </ReactTooltip>
           </IonAvatar>)
       })}
     </IonRow>

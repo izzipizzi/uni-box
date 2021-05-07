@@ -7,7 +7,7 @@ export default class BoxMutationService {
         return 'TRY_AGAIN';
       }
     });
-    return 'Deleted successfully';
+    return 'DELETED_SUCCESS';
   }
 
   async validateBox(boxId: string): Promise<string> {

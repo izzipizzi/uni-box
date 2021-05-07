@@ -45,7 +45,7 @@ function authReducer(state, action) {
     case 'LOGIN':
       return {
         ...state,
-        user: action.payload
+        user: action.payload.user
       };
     case 'LOGOUT':
       return {
@@ -59,6 +59,7 @@ function authReducer(state, action) {
 
 function AuthProvider(props) {
   const [state, dispatch] = useReducer(authReducer, initialState);
+
 
   if (localStorage.getItem('user')) {
     initialState.user = JSON.parse(localStorage.getItem('user'));
@@ -74,6 +75,7 @@ function AuthProvider(props) {
 
     console.log(userData.user);
     localStorage.setItem('user', JSON.stringify(userData.user));
+    initialState.user = JSON.parse(localStorage.getItem('user'));
     // localStorage.setItem('user',userData.user);
     dispatch({
       type: 'LOGIN',

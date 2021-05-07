@@ -4,6 +4,8 @@ import './Admin.css';
 import { AddMaterial } from './AddMaterial/AddMaterial';
 import { ModerateBoxes } from './ModerateBoxes/ModerateBoxes';
 import { AdminBoxProvider } from '../../context/admin-box-context';
+import { T } from 'react-translator-component';
+
 
 const Admin: React.FC = (props: any) => {
 
@@ -13,14 +15,19 @@ const Admin: React.FC = (props: any) => {
       <IonPage>
         <IonContent>
           <IonToolbar>
-            <IonSegment value={segment} onIonChange={(e) => {
+            <IonSegment value={segment}
+                        color={'primary'}
+                        scrollable={true}
+                        className={'box-segment-container'}
+                        mode="ios"
+                        onIonChange={(e) => {
               setSegment(e.detail.value);
             }}>
-              <IonSegmentButton value='add_material'>
-                Добавити матеріал
+              <IonSegmentButton className={'box-segment-button'} value='add_material'>
+                {T('ADD_MATERIAL')}
               </IonSegmentButton>
-              <IonSegmentButton value='moderate_boxes'>
-                Модерація коробок
+              <IonSegmentButton className={'box-segment-button'} value='moderate_boxes'>
+                {T('MODERATE_BOXES')}
               </IonSegmentButton>
             </IonSegment>
           </IonToolbar>

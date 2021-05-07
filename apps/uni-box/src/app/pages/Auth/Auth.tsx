@@ -7,6 +7,7 @@ import { AuthContext } from '../../context/auth';
 import { UIContext } from '../../context/ui-context';
 import { useForm } from '../../utils/hooks';
 import { useMutation } from '@apollo/client';
+import { T } from 'react-translator-component';
 
 
 const Auth: React.FC = (props: any) => {
@@ -21,17 +22,10 @@ const Auth: React.FC = (props: any) => {
   const [loginUser, { loading }] = useMutation(LOGIN_USER, {
     update(_, result) {
       const data = result.data.login;
-      if (data.error) {
-        ui.setError({ state: true, msg: data.error });
-      } else {
-        context.login(data);
-        history.push('/');
-        history.go(0);
-      }
+      context.login(data);
     },
     onError(err) {
-      ui.setError({ state: true, msg: err.graphQLErrors[0].extensions.exception.errors });
-      // setErrors(err.graphQLErrors[0].extensions.exception.errors);
+      ui.setError({ state: true, msg: err.graphQLErrors[0] });
     },
     variables: values
   });
@@ -50,7 +44,7 @@ const Auth: React.FC = (props: any) => {
         <div className={'content-wrapper'}>
           <div className={'form-container'}>
             <form onSubmit={onSubmit}>
-              <IonLabel class={'item-label'} position='stacked'>Email</IonLabel>
+              <IonLabel class={'item-label'} position='stacked'>{T('EMAIL')}</IonLabel>
               <div className={'input-item-container'}>
 
                 <IonInput
@@ -58,7 +52,7 @@ const Auth: React.FC = (props: any) => {
                   value={values.email}
                   onIonChange={onChange('email')} />
               </div>
-              <IonLabel class={'item-label'} position='stacked'>Password</IonLabel>
+              <IonLabel class={'item-label'} position='stacked'>{T('PASSWORD')}</IonLabel>
               <div className={'input-item-container'}>
                 <IonInput
                   type={'password'}
@@ -70,25 +64,14 @@ const Auth: React.FC = (props: any) => {
               <div className={'auth-btn-container'}>
 
                 <IonButton className={'auth-btn'} expand={'full'} shape='round' fill='solid'
-                           type={'submit'}>Увійти</IonButton>
+                           type={'submit'}>{T('LOGIN')}</IonButton>
               </div>
 
             </form>
-            {/*<IonToast*/}
-            {/*  isOpen={errors.isError}*/}
-            {/*  onDidDismiss={() => setErrors({isError: false, errorMsg: ''})}*/}
-            {/*  message={errors.errorMsg}*/}
-            {/*  color={'danger'}*/}
-            {/*  duration={2000}*/}
-            {/*/>*/}
-
           </div>
           <IonRouterLink className={'router-link'} routerLink={'signup'}>
-            Створити аккаунт
+            {T('CREATE_ACCOUNT')}
           </IonRouterLink>
-          {/*    </IonCol>*/}
-          {/*  </IonRow>*/}
-          {/*</IonGrid>*/}
         </div>
 
       </IonContent>
@@ -101,7 +84,6 @@ const LOGIN_USER = gql`
   mutation login($email: String!, $password: String!) {
     login(email: $email, password: $password) {
       token,
-      error,
       user{
         _id
         name

@@ -16,6 +16,8 @@ import { useSaveBox, useUpdateBox } from '../../service/api.action';
 import { BoxMode } from '../../enums/BoxMode';
 import { NavContext } from '../../context/nav-context';
 import { defaultBox } from '../../constatnts';
+import { T } from 'react-translator-component';
+
 
 export const BoxSaveModal = () => {
 
@@ -72,7 +74,7 @@ export const BoxSaveModal = () => {
       }} isOpen={ui.isBoxSaveModal} cssClass='box-save-modal'>
       <div className={'box-info-container'}>
         <div className={'items-list'}>
-          <IonLabel  class={'item-label'} position='stacked'>Назва коробки</IonLabel>
+          <IonLabel  class={'item-label'} position='stacked'>{T('BOX_NAME')}</IonLabel>
           <div className={'input-item-container'}>
             <IonInput
               class={'input-container'}
@@ -81,40 +83,40 @@ export const BoxSaveModal = () => {
           </div>
 
           <div className={'list-item'}>
-            <IonLabel class={'item-label'}>Ширина - </IonLabel>
-            <IonLabel class={'item-label'}>{boxContext.box.width} мм</IonLabel>
+            <IonLabel class={'item-label'}>{T('WIDTH')} - </IonLabel>
+            <IonLabel class={'item-label'}>{boxContext.box.width} {T('MM')}</IonLabel>
           </div>
           <div className={'list-item'}>
-            <IonLabel class={'item-label'}>Висота - </IonLabel>
-            <IonLabel class={'item-label'}>{boxContext.box.height} мм</IonLabel>
+            <IonLabel class={'item-label'}>{T('HEIGHT')} - </IonLabel>
+            <IonLabel class={'item-label'}>{boxContext.box.height} {T('MM')}</IonLabel>
           </div>
           <div className={'list-item'}>
-            <IonLabel class={'item-label'}>Довжина - </IonLabel>
-            <IonLabel class={'item-label'}>{boxContext.box.length} мм</IonLabel>
+            <IonLabel class={'item-label'}>{T('LENGTH')} - </IonLabel>
+            <IonLabel class={'item-label'}>{boxContext.box.length} {T('MM')}</IonLabel>
           </div>
 
           <div className={'list-item'}>
 
-            <IonLabel class={'item-label'}>Матеріал -  </IonLabel>
-            <IonLabel class={'item-label'}> {boxContext.box.material.name} {boxContext.box.material.price} грн </IonLabel>
+            <IonLabel class={'item-label'}>{T('MATERIAL')} -  </IonLabel>
+            <IonLabel class={'item-label'}> {boxContext.box.material.name} {boxContext.box.material.price} {T('UAH')} </IonLabel>
             <IonAvatar className={'box-save-img'}>
               <img src={boxContext.box.material.texture} />
             </IonAvatar>
           </div>
           <div className={'list-item'}>
             <IonLabel class={'item-label'}>
-              Доступна всім
+              {T('PUBLIC')}
             </IonLabel>
             <IonToggle checked={boxContext.box.public} onIonChange={handleChange('public')} />
           </div>
           <div className={'list-item'}>
-            <IonLabel class={'item-label'}>Ціна -  </IonLabel>
-            <IonLabel class={'item-label'}>{boxContext.box.price} грн</IonLabel>
+            <IonLabel class={'item-label'}>{T('PRICE')} -  </IonLabel>
+            <IonLabel class={'item-label'}>{boxContext.box.price} {T('UAH')}</IonLabel>
           </div>
         </div>
       </div>
-      {ui.boxMode === BoxMode.CREATE && <IonButton onClick={onSave}>Зберегти</IonButton>}
-      {ui.boxMode === BoxMode.EDIT && <IonButton onClick={onUpdate}>Обновити</IonButton>}
+      {ui.boxMode === BoxMode.CREATE && <IonButton onClick={onSave}>[{T('SAVE')}]</IonButton>}
+      {ui.boxMode === BoxMode.EDIT && <IonButton onClick={onUpdate}>{T('UPDATE')}</IonButton>}
     </IonModal>
   );
 };

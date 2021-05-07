@@ -1,4 +1,4 @@
 type Mutation {
-    login(email: String!, password: String!):LoginResponse!,
+    login(email: String!, password: String!):LoginResponse,
     signup(name:String!,email: String!, password: String!): String!
 }

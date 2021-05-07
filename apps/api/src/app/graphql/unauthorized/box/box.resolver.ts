@@ -18,7 +18,6 @@ const publicBoxResolver = {
     // } ,
 
     getPublicValidatedBoxes(parent, { _ }, ctx) {
-      console.log('xyui')
       return boxQueryService.getPublicValidatedBoxes();
     }
   },

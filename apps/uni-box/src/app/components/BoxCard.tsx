@@ -6,6 +6,8 @@ import './BoxCard.css';
 import { BoxContext } from '../context/box';
 import { UIContext } from '../context/ui-context';
 import { BoxMode } from '../enums/BoxMode';
+import { T } from 'react-translator-component';
+
 
 const BoxCard = ({ box }) => {
 
@@ -23,17 +25,16 @@ const BoxCard = ({ box }) => {
     <Link onClick={async () => {
       boxContext.setBox(localBox);
       await ui.setBoxMode(BoxMode.EDIT);
-      console.log(ui.boxMode);
     }} to={'/edit'} className={'box-card'}>
       <IonAvatar className={'box-preview'}>
         <img src={API_PHOTOS + box.previewImg} alt={box.name} />
       </IonAvatar>
       <div className={'card-header'}>
         <div className={'card-title'}>{box.name}</div>
-      <IonBadge>{box.validated && 'valid'}</IonBadge>
-      <IonBadge color={'danger'}>{box.declined && 'declined'}</IonBadge>
-      <IonBadge>{box.public && 'public'}</IonBadge>
-      <IonBadge>{box.price}</IonBadge>
+      <IonBadge>{box.validated && T('VALID')}</IonBadge>
+      <IonBadge color={'danger'}>{box.declined && T('DECLINED')}</IonBadge>
+      <IonBadge>{box.public && T('PUBLIC')}</IonBadge>
+      <IonBadge>{box.price} {T('UAH')}</IonBadge>
       </div>
     </Link>
   );

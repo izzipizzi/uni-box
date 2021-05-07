@@ -1,6 +1,5 @@
 type LoginResponse {
   token: String,
-  error: String,
   user:User
 }
 
@@ -37,7 +36,7 @@ type PublicBox{
   validated:Boolean
   public:Boolean
   declined:Boolean
-  price: Int
+  price: Float
 
 }
 

@@ -42,20 +42,20 @@ export const defaultMaterial = {
 }
 
 export const gifts = [
-  ['спорт інвентар'],
-  ['навушнкии'],
-  ['парфуми'],
-  ['музичний інструмент'],
-  ['книга'],
-  ['посуд'],
-  ['аксесуари для куріння'],
-  ['аксесуари для повсякденного життя'],
-  ['алкоголь'],
-  ['гаджети для геймингу'],
-  ['косметика'],
-  ['подарункові сертифікати'],
-  ['дизайнерські речі'],
-  ['іграшки']
+  ['SPORT_INVENTORY'],
+  ['HEADPHONES'],
+  ['PERFUMES'],
+  ['MUSIC_TOOLS'],
+  ['BOOK'],
+  ['KITCHEN_ACCESSORIES'],
+  ['SMOKING_ACCESSORIES'],
+  ['CASUAL_ACCESSORIES'],
+  ['ALCOHOL'],
+  ['GAMING_GADGETS'],
+  ['MAKEUP'],
+  ['GIFT_CERTIFICATES'],
+  ['DESIGNER_STUFF'],
+  ['TOYS']
 ];
 export const reversed = [
   [50, 20, 30, 50, 40, 90],

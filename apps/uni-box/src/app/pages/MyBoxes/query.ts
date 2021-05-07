@@ -11,6 +11,7 @@ export const GET_BOXES_BY_USER = gql`
         _id
         name
         texture
+        price
       }
       color
       width

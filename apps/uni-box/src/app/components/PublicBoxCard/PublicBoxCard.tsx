@@ -5,6 +5,8 @@ import './PublicBoxCard.css';
 import { AdminBoxContext } from '../../context/admin-box-context';
 import { API, API_PHOTOS } from '../../constatnts';
 import { BoxContext } from '../../context/box';
+import { T } from 'react-translator-component';
+
 
 const PublicBoxCard = ({ box }) => {
   const boxContext = useContext(BoxContext);
@@ -18,7 +20,6 @@ const PublicBoxCard = ({ box }) => {
   }, [box]);
   return (
     <Link onClick={async () => {
-      console.log(localBox)
       boxContext.setBox(localBox);
     }} to={'/view-box'} className={'box-card'}>
       <IonAvatar className={'box-preview'}>
@@ -28,12 +29,12 @@ const PublicBoxCard = ({ box }) => {
         <div className={'card-title'}>{box.name}</div>
       </div>
       <div className={'author-container'}>
-        <span>Автор</span>
+        <span>{T('AUTHOR')}</span>
         <span>{box.user.name}</span>
       </div>
       <div className={'author-container'}>
-        <span>Ціна</span>
-        <span>{box.price} грн</span>
+        <span>{T('PRICE')}</span>
+        <span>{box.price} {T('UAH')}</span>
       </div>
     </Link>
   );

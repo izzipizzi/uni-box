@@ -22,6 +22,7 @@ import { NavContext } from '../../context/nav-context';
 import { DefaultMaterials } from '../../components/DefaultMaterials/DefaultMaterials';
 import { UserMaterials } from '../../components/UserMaterials/UserMaterials';
 import { MaterialSaveModal } from '../../components/modal/MaterialSaveModal';
+import { T } from 'react-translator-component';
 
 
 const Create: React.FC = () => {
@@ -50,11 +51,7 @@ const Create: React.FC = () => {
     });
 
   };
-  const [defaultMaterials, setDefaultMaterials] = useState([]);
-  const [userMaterials, setUserMaterials] = useState([]);
-
-
-  useIonViewWillEnter(() => {
+   useIonViewWillEnter(() => {
     ui.setShowModeModal(true);
     boxContext.setBox(defaultBox);
   });
@@ -81,10 +78,10 @@ const Create: React.FC = () => {
                     boxContext.setBox({ ...boxContext.box, model: e.detail.value });
                   }} value={boxContext.box.model}>
                     <IonSegmentButton className={'box-segment-button'} value='SQUARE'>
-                      Square Box
+                      {T('SQUARE_BOX')}
                     </IonSegmentButton>
                     <IonSegmentButton  className={'box-segment-button'} value='ROUNDED'>
-                      Rounded Box
+                      {T('ROUNDED_BOX')}
                     </IonSegmentButton>
                   </IonSegment>
 

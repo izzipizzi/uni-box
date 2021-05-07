@@ -5,7 +5,6 @@ import { RESOLVERS } from "./resolver.register";
 export const generateSchema =  (authorized = false) => {
 
 
-  console.log(authorized)
     // Collect resolvers and type definitions based on auth
     const resolvers = authorized ? RESOLVERS.authorized : RESOLVERS.unauthorized;
     const typeDefs = authorized ? generateTypeDefinitions(TypeDefinition.Authorized) : generateTypeDefinitions(TypeDefinition.Unauthorized);

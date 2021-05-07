@@ -8,6 +8,8 @@ import { NavContext } from '../../context/nav-context';
 import axios from 'axios';
 import { API } from '../../constatnts';
 import { MaterialContext } from '../../context/material-context';
+import { T } from 'react-translator-component';
+
 
 export const MaterialSaveModal = () => {
 
@@ -77,14 +79,14 @@ export const MaterialSaveModal = () => {
       swipeToClose={true}
       isOpen={ui.isMaterialSaveModal} cssClass='material-modal'>
 
-      <IonLabel class={'item-label'} position='stacked'>Назва матеріалу</IonLabel>
+      <IonLabel class={'item-label'} position='stacked'>{T('MATERIAL_NAME')}</IonLabel>
       <div className={'input-item-container'}>
         <IonInput
           class={'input-container'}
           type={'text'} value={textures.name} onIonChange={handleTextChange('name')} />
       </div>
       <label htmlFor={'input-file'} className={'item-label input-file-label'} >
-        Виберіть файл
+        {T('CHOOSE_FILE')}
       </label>
       <input type={'file'} onChange={handleTexturesChange('texture')} accept={'file'} id={'input-file'}
              className={'input-file'} />
@@ -114,7 +116,7 @@ export const MaterialSaveModal = () => {
               ui.setError(error.response.data.error);
             });
           ui.setShowMaterialSaveModal(false);
-        }}>Завантажити власний матеріал
+        }}>{T('LOAD_OWN_MATERIAL')}
       </IonButton>
 
 

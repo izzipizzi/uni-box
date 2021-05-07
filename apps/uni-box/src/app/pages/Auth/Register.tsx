@@ -1,14 +1,17 @@
 import { IonButton, IonContent, IonInput, IonLabel, IonPage } from '@ionic/react';
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { gql, useMutation } from '@apollo/client';
 import { useForm } from '../../utils/hooks';
 
 import { useHistory } from 'react-router-dom';
+import { UIContext } from '../../context/ui-context';
 
+import { T } from 'react-translator-component';
 
 const Register = (props) => {
 
   const history = useHistory();
+  const ui = useContext(UIContext);
 
   const [errors, setErrors] = useState({});
 
@@ -21,7 +24,8 @@ const Register = (props) => {
 
   const [addUser, { loading }] = useMutation(REGISTER_USER, {
     update(_, result) {
-      history.push('/');
+      history.push('/auth');
+      ui.setSuccess({ state: true, msg: 'USER_CREATED' });
     },
     onError(err) {
       setErrors(err.graphQLErrors[0].extensions.exception.errors);
@@ -30,7 +34,13 @@ const Register = (props) => {
   });
 
   function registerUser() {
+
+    if (!values.email || !values.password || !values.name) {
+      ui.setError({ state: true, msg: 'ALL_FIELDS_REQUIRED' });
+    }else{
+
     addUser();
+    }
   }
 
 
@@ -47,7 +57,7 @@ const Register = (props) => {
 
             <form onSubmit={onSubmit}>
 
-              <IonLabel class={'item-label'} position='stacked'>Name</IonLabel>
+              <IonLabel class={'item-label'} position='stacked'>{T('NAME')}</IonLabel>
               <div className={'input-item-container'}>
                 <IonInput
                   value={values.name}
@@ -56,7 +66,7 @@ const Register = (props) => {
 
                 />
               </div>
-              <IonLabel class={'item-label'} position='stacked'>Email</IonLabel>
+              <IonLabel class={'item-label'} position='stacked'>{T('EMAIL')}</IonLabel>
               <div className={'input-item-container'}>
 
                 <IonInput
@@ -67,7 +77,7 @@ const Register = (props) => {
 
                 />
               </div>
-              <IonLabel class={'item-label'} position='stacked'>Password</IonLabel>
+              <IonLabel class={'item-label'} position='stacked'>{T('PASSWORD')}</IonLabel>
               <div className={'input-item-container'}>
                 <IonInput
                   type={'password'}
@@ -78,7 +88,7 @@ const Register = (props) => {
                   onIonChange={onChange('password')}
                 />
               </div>
-              <IonButton shape='round' fill='solid' expand={'full'} type={'submit'}>Увійти</IonButton>
+              <IonButton shape='round' fill='solid' expand={'full'} type={'submit'}>{T('SIGNUP')}</IonButton>
             </form>
           </div>
         </div>
@@ -95,7 +105,6 @@ const REGISTER_USER = gql`
     $password: String!
   ) {
     signup(
-
       name: $name
       email: $email
       password: $password

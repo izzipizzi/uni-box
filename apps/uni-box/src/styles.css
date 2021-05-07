@@ -124,11 +124,19 @@ ion-tab-bar{
 
 .box-segment-button{
   color: dodgerblue;
-  --color: #cecece;
-  --color-focused: black;
+  --color: #5a5a5a;
+  --background-checked:red;
+  --color-focused: #cecece;
   --color-checked: black;
   height: 40px;
   --border-radius:26px
+}
+.box-segment-button:hover{
+  --color-focused: #cecece;
+  --color-checked: #cecece;
+  color: #cecece;
+
+
 }
 .add_icon{
   width: 100%;
@@ -179,4 +187,11 @@ ion-avatar{
 }
 .menu-item{
   --background: #2a2a2a;
+}
+
+.rtc-translator{
+  background: #2a2a2a;
+  width: 100%;
+  margin-top: 0;
+  margin-bottom: 0;
 }

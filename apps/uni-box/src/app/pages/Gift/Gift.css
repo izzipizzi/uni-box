@@ -1,4 +1,16 @@
-.form-container{
-  overflow-x: scroll;
-  overflow-y: scroll;
+.form-container .scroll{
+}
+
+.gifts{
+  width: 100%;
+height: 100%;
+  overflow-y: auto;
+  overflow-x: auto;
+}
+.gifts-wrapper{
+  padding-bottom: 40px;
+}
+li{
+  color: #cecece;
+
 }

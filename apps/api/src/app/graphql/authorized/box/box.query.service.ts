@@ -11,13 +11,11 @@ export default class BoxQueryService {
   }
   async getPublicNoValidatedBoxes(): Promise<IBox[]> {
     const box= await Box.find({ public: true, validated: false, declined: false }).populate('user').populate('material').exec()
-    console.log(box)
     return box
 
   }
   async getPublicValidatedBoxes(): Promise<IBox[]> {
     const box = await Box.find({ public: true, validated: true, declined: false }).populate('material').populate('user')
-    console.log(box)
     return box
   }
   async getDeclinedBoxes(): Promise<IBox[]> {

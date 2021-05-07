@@ -14,7 +14,7 @@ import React, { useContext, useEffect, useState } from 'react';
 import {ellipsisVerticalOutline} from "ionicons/icons";
 import {Redirect, useHistory} from "react-router-dom";
 import { AuthContext } from '../../context/auth';
-
+import {T,LanguageList} from 'react-translator-component'
 
 const Header = (props) => {
 
@@ -22,11 +22,14 @@ const Header = (props) => {
 
   const [showLoading, setShowLoading] = useState(false);
   const [popoverState, setShowPopover] = useState({showPopover: false, event: undefined});
+  const [langPopoverState, setShowLangPopover] = useState({showPopover: false, event: undefined});
 
   const [loading, setLoading] = useState(true)
   const history = useHistory()
 
-
+  const closePopover = () =>{
+    setShowPopover({showPopover: false, event: undefined})
+  }
   return (
     <IonHeader>
 
@@ -41,7 +44,7 @@ const Header = (props) => {
           </IonButton>
         </IonButtons>
         <IonTitle>
-          {context?.user ? context?.user?.name : null} Welcome to UniBox
+          {context?.user && context?.user?.name} &nbsp; {T('WELCOME')}
         </IonTitle>
 
       </IonToolbar>
@@ -50,33 +53,47 @@ const Header = (props) => {
         cssClass='my-custom-class'
         event={popoverState.event}
         isOpen={popoverState.showPopover}
-        onDidDismiss={() => setShowPopover({showPopover: false, event: undefined})}
+        onDidDismiss={closePopover}
       >
         <IonList class={'menu'}>
-          <IonItem class={'menu-item'} button onClick={() => {
-          }}>
+          <IonItem  class={'menu-item'} button onClick={
+            (e: any) => {
+              e.persist();
+              setShowLangPopover({ showPopover: true, event: e })
+            }}>
+            {T('LANGUAGE')}
+          </IonItem>
+          <IonItem onClick={closePopover} class={'menu-item'} button>
             <IonRouterLink className={'router-link'} routerLink={'gifts'}>
-              Підібрати подарунок
+              {T('CHOOSE_GIFT')}
             </IonRouterLink>
           </IonItem>
-          {!context?.user &&  <IonItem class={'menu-item'}>
+          {!context?.user &&  <IonItem onClick={closePopover}  class={'menu-item'}>
             <IonRouterLink className={'router-link'} routerLink={'signup'}>
-              Створити аккаунт
+              {T('CREATE_ACCOUNT')}
             </IonRouterLink>
           </IonItem>}
           {
             !context?.user ? null : (<IonItem class={'menu-item'} button  onClick={()=>{
               context.logout()
-              setShowPopover({showPopover: false, event: undefined})
               history.push('/auth')
+              closePopover();
             }}>
               <IonLabel color={'danger'}>
-                Вийти
+                {T('LOGOUT')}
               </IonLabel>
             </IonItem>)
           }
 
         </IonList>
+      </IonPopover>
+      <IonPopover
+        cssClass='my-custom-class'
+        event={langPopoverState.event}
+        isOpen={langPopoverState.showPopover}
+        onDidDismiss={() => setShowLangPopover({showPopover: false, event: undefined})}
+      >
+        <LanguageList />
       </IonPopover>
     </IonHeader>
   )

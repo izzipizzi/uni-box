@@ -12,7 +12,6 @@ export default class BoxQueryService {
 
   async getPublicValidatedBoxes(): Promise<IBox[]> {
     const box = await Box.find({ public: true, validated: true, declined: false }).populate('material').populate('user')
-    console.log(box)
     return box
   }
 
