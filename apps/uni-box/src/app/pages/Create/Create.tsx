@@ -66,9 +66,7 @@ const Create: React.FC = () => {
         <IonContent>
           <IonGrid class={'ion-grid'}>
             <IonRow class={'ion-row'}>
-              <IonCol class={'ion-col'}>
-
-
+              <IonCol class={'ion-col form-container'}>
                   <IonSegment
                     color={'primary'}
                     scrollable={true}
@@ -87,12 +85,12 @@ const Create: React.FC = () => {
 
                 <IonRow>
 
-                </IonRow>
                 <div className='form-wrapper'>
                 <DefaultMaterials />
                 <UserMaterials />
                 </div>
                 <BoxForm />
+                </IonRow>
               </IonCol>
               <IonCol class={'ion-col canvas'}>
                 <Canvas3D />
@@ -101,7 +99,6 @@ const Create: React.FC = () => {
           </IonGrid>
         </IonContent>
       )}
-
     </IonPage>
   );
 };

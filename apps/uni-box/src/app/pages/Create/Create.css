@@ -59,3 +59,54 @@ ion-input{
   --border-radius: 20px;
   --border-color: black
 }
+
+/* Extra small devices (phones, 600px and down) */
+@media only screen and (max-width: 600px) {
+
+}
+
+/* Small devices (portrait tablets and large phones, 600px and up) */
+@media only screen and (max-width: 600px) {
+  .ion-row{
+
+    display: flex;
+    flex-direction: column-reverse;
+
+
+    /*display: grid;*/
+    /*grid-template-areas:*/
+    /*"form"*/
+    /*"canvas";*/
+    /*grid-template-rows: 14fr 1fr ;*/
+    /*grid-template-columns: 1fr;*/
+    /*grid-gap: 10px;*/
+    height: 100vh;
+    margin: 0;
+  }
+  .ion-col{
+    width: 100%!important;
+    max-width: 100%!important;
+  }
+  .form-container{
+    padding: 10px!important;
+    flex-grow: 1;
+    overflow-y : hidden;
+    overflow-x : hidden;
+  }
+  .form-wrapper{
+    height: 100%;
+  }
+  .canvas{
+    flex-grow: 3;
+  }
+}
+
+/* Medium devices (landscape tablets, 768px and up) */
+@media only screen and (min-width: 768px) {
+
+}
+
+/* Large devices (laptops/desktops, 992px and up) */
+@media only screen and (min-width: 992px) {
+
+}

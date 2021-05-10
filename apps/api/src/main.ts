@@ -29,8 +29,8 @@ const start = async () => {
   app.use(bodyParser.json());
   app.use( bodyParser.urlencoded({ extended: true }));
 
-  
-  const local = true;
+
+  const local = false;
   require("dotenv").config()
   mongoose.connect(local ? process.env.MONGODB_URI_LOCAL : process.env.MONGODB_URI, {
     useNewUrlParser: true,
